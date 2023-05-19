@@ -2,7 +2,7 @@ package entities;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Random;
+import java.lang.Math;
 import java.util.Set;
 import java.util.HashSet;
 
@@ -12,7 +12,9 @@ import enums.Option;
 
 public class GameTurn {
   private List<Integer> combination = new ArrayList<Integer>();
+  
   private final int damageLimit = 51;
+  private final int minimumDamage = 5;
 
   public GameTurn(String playerChoice, String computerChoice) { // need to remove computerChoice
     this.combination.add(Option.valueOf(playerChoice).getValue());
@@ -58,8 +60,7 @@ public class GameTurn {
   }
 
   public int generateDamage() {
-    Random random = new Random();
-    return random.nextInt(this.damageLimit);
+    return (int) ((Math.random() * (damageLimit - minimumDamage)) + minimumDamage);
   }
 
   private int processTurnOutcome() {

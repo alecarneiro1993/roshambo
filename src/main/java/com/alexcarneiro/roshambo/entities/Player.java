@@ -1,7 +1,5 @@
 package entities;
 
-import java.util.ArrayList;
-import java.util.Random;
 import jakarta.persistence.*;
 
 import enums.Option;
