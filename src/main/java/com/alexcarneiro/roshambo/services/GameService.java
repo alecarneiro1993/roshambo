@@ -42,7 +42,7 @@ public class GameService {
     if (turnResult != 0) {
       damage = gameTurn.generateDamage();
       Player damagedPlayer = playerRepository.findByType(turnResult == 1 ? "computer" : "player");
-      damagedPlayer.takeDamage(100);
+      damagedPlayer.takeDamage(damage);
       playerRepository.save(damagedPlayer);
     }
     Map result = new HashMap();
