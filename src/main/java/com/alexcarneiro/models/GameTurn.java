@@ -1,5 +1,6 @@
 package models;
 
+import lombok.Getter;
 import lombok.Setter;
 import java.util.List;
 import java.util.ArrayList;
@@ -17,6 +18,18 @@ public class GameTurn {
   
   private final int[] damageLimit = { 25, 60 };
 
+  private enum Outcome {
+    WIN(1),
+    DRAW(0),
+    LOSE(-1);
+
+    @Getter private int value;
+
+    Outcome(int value) {
+      this.value = value;
+    }
+  }
+
   @JsonCreator
   public GameTurn(@JsonProperty("playerChoice") String choice) {
     this.playerValue = Option.valueOf(choice).getValue();
@@ -31,11 +44,11 @@ public class GameTurn {
 
   public int process() {
     if (isTie()) {
-      return 0;
+      return Outcome.DRAW.getValue();
     }
 
-    List<List<Integer>> winningCombinations = WinningCombination.getValuesOfCombinations();
-    return winningCombinations.contains(this.getCombination()) ? 1 : -1;
+    List<List<Integer>> values = WinningCombination.getValuesOfCombinations();
+    return (values.contains(this.getCombination()) ? Outcome.WIN : Outcome.LOSE).getValue();
   }
 
   public int generateDamage() {
