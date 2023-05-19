@@ -1,5 +1,7 @@
 package models;
 
+import lombok.Getter;
+import lombok.Setter;
 import java.util.List;
 import java.util.ArrayList;
 import java.lang.Math;
@@ -13,29 +15,32 @@ import entities.Player;
 import enums.*;
 
 public class GameTurn {
-  private List<Integer> combination = new ArrayList<Integer>();
+  private Integer playerValue;
+  private Integer computerValue;
   
-  private final int damageLimit = 51;
-  private final int minimumDamage = 1;
+  private final int maximumDamage = 60;
+  private final int minimumDamage = 25;
 
   @JsonCreator
   public GameTurn(@JsonProperty("playerChoice") String choice) {
-    this.combination.add(Option.valueOf(choice).getValue());
+    this.playerValue = Option.valueOf(choice).getValue();
   }
 
   public List<Integer> getCombination() {
-    return this.combination;
+    return new ArrayList<Integer>(){{
+      add(playerValue);
+      add(computerValue);
+    }};
   }
 
   public int process(int computerValue) {
-    this.combination.add(computerValue);
-    this.processTurnOutcome();
+    this.computerValue = computerValue;
     
     return this.processTurnOutcome();
   }
 
   public int generateDamage() {
-    return (int) ((Math.random() * (damageLimit - minimumDamage)) + minimumDamage);
+    return (int) ((Math.random() * (maximumDamage - minimumDamage)) + minimumDamage);
   }
 
   private int processTurnOutcome() {
@@ -44,10 +49,10 @@ public class GameTurn {
     }
 
     List<List<Integer>> winningCombinations = WinningCombination.getValuesOfCombinations();
-    return winningCombinations.contains(this.combination) ? 1 : -1;
+    return winningCombinations.contains(this.getCombination()) ? 1 : -1;
   }
 
   private Boolean isTie() {
-    return new HashSet<Integer>(this.combination).size() == 1; 
+    return new HashSet<Integer>(this.getCombination()).size() == 1; 
   }
 }
