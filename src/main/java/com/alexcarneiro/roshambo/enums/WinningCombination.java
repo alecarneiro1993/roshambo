@@ -1,5 +1,7 @@
 package enums;
 
+import lombok.Getter;
+import lombok.Setter;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -8,22 +10,20 @@ public enum WinningCombination {
   PAPER_ROCK(1, 0),
   SCISSOR_PAPER(2, 1);
 
-  private List<Integer> combination = new ArrayList<Integer>();
+  @Getter @Setter private List<Integer> combination;
 
   WinningCombination(int playerValue, int computerValue) {
-    this.combination.add(playerValue);
-    this.combination.add(computerValue);
+    this.combination = new ArrayList<Integer>(){{
+      add(playerValue);
+      add(computerValue);
+    }};
   }
 
-  public List<Integer> getCombination() { 
-      return combination;
-  }
-
-  public static List<List<Integer>> getValuesOfCombinations() {
-    List<List<Integer>> combinations = new ArrayList<List<Integer>>();
-    for (WinningCombination combination : WinningCombination.values()) {
-      combinations.add(combination.getCombination());
-    }
-    return combinations;
+  public static List<List<Integer>> getValuesOfCombinations() {    
+    return new ArrayList<List<Integer>>(){{
+      for (WinningCombination winningCombination : WinningCombination.values()) {
+        add(winningCombination.getCombination());
+      }
+    }};
   }
 }

@@ -1,5 +1,6 @@
 package enums;
 
+import lombok.Getter;
 import java.util.Random;
 
 public enum Option {
@@ -7,14 +8,10 @@ public enum Option {
   PAPER(1),
   SCISSOR(2);
 
-  private int value;
+  @Getter private int value;
 
   Option(int value) {
     this.value = value;
-  }
-
-  public int getValue() { 
-      return value;
   }
 
   public static Option getRandom() {
