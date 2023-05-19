@@ -11,64 +11,50 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Map;
 import java.util.HashMap;
-import java.util.List;
-import java.util.ArrayList;
 import java.lang.Object;
 
 import entities.Player;
-import entities.GameTurn;
-
-import enums.Option;
-
-import repositories.PlayerRepository;
+import models.GameTurn;
+import services.GameService;
 
 @RestController
 @RequestMapping("/api/game")
 @CrossOrigin(origins = "http://localhost:4200")
-public class GameController {
+public class GameController {    
     @Autowired
-    PlayerRepository playerRepository;
+    GameService gameService;
 
     Map<String, Object> response = new HashMap<>();
-    Map data = new HashMap();
 
     @GetMapping("/options")
     public ResponseEntity getOptions() {
         Map data = new HashMap();
-        data.put("options", Option.values());
+        data.put("options", gameService.getOptions());
         response.put("data", data);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
     
     @GetMapping("/players")
     public ResponseEntity getPlayers() {
-        Map data = new HashMap();
-        List<Player> players = new ArrayList<Player>();
-        playerRepository.deleteAll();
-        playerRepository.save(new Player("Player 1 (You)", "player", "ryu.png"));
-        playerRepository.save(new Player("CPU", "computer", "sagat.png"));
-        data.put("players", playerRepository.findAll());
+        Map data = new HashMap(){{
+            put("players", gameService.getNewPlayers());
+        }};
         response.put("data", data);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping("/resolve")
-    public ResponseEntity resolveTurn(@RequestBody GameTurn gameTurn) {
-        Map data = new HashMap();
-        Option computerChoice = Option.getRandom();
-        int turnValue = gameTurn.resolve(computerChoice.getValue());
-        int damage = 0;
-        if (turnValue != 0) {
-            damage = gameTurn.generateDamage();
-            Player damagedPlayer = playerRepository.findByType(turnValue == 1 ? "computer" : "player");
-            damagedPlayer.takeDamage(damage);
-            playerRepository.save(damagedPlayer);
-        }
-
-        data.put("damageTaken", damage);
-        data.put("turnResult", turnValue);
-        data.put("computerChoice", computerChoice);
-        data.put("players", playerRepository.findAll());
+    public ResponseEntity resolve(@RequestBody GameTurn gameTurn) {
+        response.put("data", gameService.process(gameTurn));
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+    
+    @PostMapping("/reset")
+    public ResponseEntity reset() {
+        gameService.resetGame();
+        Map data = new HashMap(){{
+            put("players", gameService.getNewPlayers());
+        }};
         response.put("data", data);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
