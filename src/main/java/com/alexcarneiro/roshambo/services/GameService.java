@@ -36,7 +36,8 @@ public class GameService {
 
   public Map process(GameTurn gameTurn) {
     Option computerChoice = Option.getRandom();
-    int turnResult = gameTurn.process(computerChoice.getValue());
+    gameTurn.setComputerValue(computerChoice.getValue());
+    int turnResult = gameTurn.process();
     int damage = 0;
     
     if (turnResult != 0) {

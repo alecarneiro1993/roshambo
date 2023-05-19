@@ -1,6 +1,5 @@
 package models;
 
-import lombok.Getter;
 import lombok.Setter;
 import java.util.List;
 import java.util.ArrayList;
@@ -10,16 +9,13 @@ import java.util.HashSet;
 import com.fasterxml.jackson.annotation.JsonCreator; 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import entities.Player;
-
 import enums.*;
 
 public class GameTurn {
   private Integer playerValue;
-  private Integer computerValue;
+  @Setter private Integer computerValue;
   
-  private final int maximumDamage = 60;
-  private final int minimumDamage = 25;
+  private final int[] damageLimit = { 25, 60 };
 
   @JsonCreator
   public GameTurn(@JsonProperty("playerChoice") String choice) {
@@ -33,23 +29,17 @@ public class GameTurn {
     }};
   }
 
-  public int process(int computerValue) {
-    this.computerValue = computerValue;
-    
-    return this.processTurnOutcome();
-  }
-
-  public int generateDamage() {
-    return (int) ((Math.random() * (maximumDamage - minimumDamage)) + minimumDamage);
-  }
-
-  private int processTurnOutcome() {
+  public int process() {
     if (isTie()) {
       return 0;
     }
 
     List<List<Integer>> winningCombinations = WinningCombination.getValuesOfCombinations();
     return winningCombinations.contains(this.getCombination()) ? 1 : -1;
+  }
+
+  public int generateDamage() {
+    return (int) ((Math.random() * (damageLimit[1] - damageLimit[0])) + damageLimit[0]);
   }
 
   private Boolean isTie() {
