@@ -1,4 +1,4 @@
-package models;
+package dtos;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -12,9 +12,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import enums.*;
 
-public class GameTurn {
-  private Integer playerValue;
-  @Setter private Integer computerValue;
+public class GameTurnDTO {
+  @Getter @Setter private Integer playerValue;
+  @Getter @Setter private Integer computerValue;
   
   private final int[] damageLimit = { 25, 60 };
 
@@ -31,8 +31,12 @@ public class GameTurn {
   }
 
   @JsonCreator
-  public GameTurn(@JsonProperty("playerChoice") String choice) {
-    this.playerValue = Option.valueOf(choice).getValue();
+  public GameTurnDTO(@JsonProperty("playerChoice") String choice) {
+    try {
+      this.playerValue = Option.valueOf(choice).getValue();
+    } catch (IllegalArgumentException e) {
+      throw new IllegalArgumentException("Invalid Choice " + choice, e);
+    }
   }
 
   public List<Integer> getCombination() {

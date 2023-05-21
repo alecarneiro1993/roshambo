@@ -3,11 +3,14 @@ package entities;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.NoArgsConstructor;
 
 import enums.Option;
+import enums.PlayerType;
 
 @Entity
 @Table (name = "players")
+@NoArgsConstructor
 public class Player {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,13 +29,9 @@ public class Player {
   @Column(name = "health")
   @Getter @Setter private int health;
 
-  public Player() {
-    super();
-  }
-
-  public Player(String name, String type, String image ) {
+  public Player(String name, PlayerType type, String image ) {
     this.name = name;
-    this.type = type;
+    this.type = type.getValue();
     this.image = String.format("../../assets/images/%s", image);
     this.health = 100;
   }

@@ -1,4 +1,3 @@
-
 package repositories;
 
 import org.springframework.stereotype.Repository;
@@ -9,11 +8,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import entities.Player;
 
+@Transactional
 @Repository
 public interface PlayerRepository extends CrudRepository<Player, Integer> {
     Player findByType(String type);
     
-    @Transactional
+
     @Modifying
     @Query("UPDATE Player p set p.health = 100")
     void resetPlayersHealth();

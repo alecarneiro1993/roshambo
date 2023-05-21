@@ -13,7 +13,8 @@ import java.util.Map;
 import java.util.HashMap;
 import java.lang.Object;
 
-import models.GameTurn;
+import dtos.GameTurnDTO;
+
 import services.GameService;
 
 @RestController
@@ -23,38 +24,40 @@ public class GameController {
     @Autowired
     GameService gameService;
 
-    Map<String, Object> response = new HashMap<>();
-
     @GetMapping("/options")
     public ResponseEntity getOptions() {
+        Map<String, Object> response = new HashMap<>();
         Map data = new HashMap();
         data.put("options", gameService.getOptions());
         response.put("data", data);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return ResponseEntity.ok(response);
     }
     
     @GetMapping("/players")
     public ResponseEntity getPlayers() {
+        Map<String, Object> response = new HashMap<>();
         Map data = new HashMap(){{
             put("players", gameService.getNewPlayers());
         }};
         response.put("data", data);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/resolve")
-    public ResponseEntity resolve(@RequestBody GameTurn gameTurn) {
+    public ResponseEntity resolveGameTurn(@RequestBody GameTurnDTO gameTurn) {
+        Map<String, Object> response = new HashMap<>();
         response.put("data", gameService.process(gameTurn));
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return ResponseEntity.ok(response);
     }
     
     @PostMapping("/reset")
-    public ResponseEntity reset() {
+    public ResponseEntity resetGame() {
+        Map<String, Object> response = new HashMap<>();
         gameService.resetGame();
         Map data = new HashMap(){{
             put("players", gameService.getNewPlayers());
         }};
         response.put("data", data);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return ResponseEntity.ok(response);
     }
 }
