@@ -1,4 +1,4 @@
-package enums;
+package com.alexcarneiro.roshambo.enums;
 
 import lombok.Getter;
 import java.util.Random;

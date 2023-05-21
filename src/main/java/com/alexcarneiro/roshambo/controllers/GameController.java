@@ -13,9 +13,8 @@ import java.util.Map;
 import java.util.HashMap;
 import java.lang.Object;
 
-import dtos.GameTurnDTO;
-
-import services.GameService;
+import com.alexcarneiro.roshambo.dtos.GameTurnDTO;
+import com.alexcarneiro.roshambo.services.GameService;
 
 @RestController
 @RequestMapping("/api/game")

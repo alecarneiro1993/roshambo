@@ -1,4 +1,4 @@
-package dtos;
+package com.alexcarneiro.roshambo.dtos;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +10,7 @@ import java.util.HashSet;
 import com.fasterxml.jackson.annotation.JsonCreator; 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import enums.*;
+import com.alexcarneiro.roshambo.enums.*;
 
 public class GameTurnDTO {
   @Getter @Setter private Integer playerValue;

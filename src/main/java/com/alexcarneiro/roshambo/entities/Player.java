@@ -1,12 +1,12 @@
-package entities;
+package com.alexcarneiro.roshambo.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
 
-import enums.Option;
-import enums.PlayerType;
+import com.alexcarneiro.roshambo.enums.Option;
+import com.alexcarneiro.roshambo.enums.PlayerType;
 
 @Entity
 @Table (name = "players")
