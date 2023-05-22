@@ -7,7 +7,8 @@ public enum Outcome {
   DRAW(0),
   LOSE(-1);
 
-  @Getter private int value;
+  @Getter
+  private int value;
 
   Outcome(int value) {
     this.value = value;

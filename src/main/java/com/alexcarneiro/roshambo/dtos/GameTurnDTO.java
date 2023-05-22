@@ -1,17 +1,18 @@
 package com.alexcarneiro.roshambo.dtos;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.NoArgsConstructor;
-import java.util.List;
 import java.util.ArrayList;
-import java.lang.Math;
-import java.util.Set;
 import java.util.HashSet;
-import com.fasterxml.jackson.annotation.JsonCreator; 
+import java.util.List;
+
+import com.alexcarneiro.roshambo.enums.Option;
+import com.alexcarneiro.roshambo.enums.Outcome;
+import com.alexcarneiro.roshambo.enums.WinningCombination;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import com.alexcarneiro.roshambo.enums.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor
 public class GameTurnDTO {

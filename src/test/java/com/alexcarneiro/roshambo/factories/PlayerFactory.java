@@ -1,9 +1,8 @@
 package com.alexcarneiro.roshambo.factories;
 
-import com.github.javafaker.Faker;
-
 import com.alexcarneiro.roshambo.entities.Player;
 import com.alexcarneiro.roshambo.enums.PlayerType;
+import com.github.javafaker.Faker;
 
 public class PlayerFactory {
 

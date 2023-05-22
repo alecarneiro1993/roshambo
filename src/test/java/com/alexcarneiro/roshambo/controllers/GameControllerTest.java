@@ -1,31 +1,31 @@
 package com.alexcarneiro.roshambo.controllers;
 
-import org.mockito.ArgumentCaptor;
-import org.mockito.Mockito;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.hamcrest.Matchers.contains;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.alexcarneiro.roshambo.RoshamboApplication;
 import com.alexcarneiro.roshambo.dtos.GameTurnDTO;
-import com.alexcarneiro.roshambo.services.GameService;
-import com.alexcarneiro.roshambo.enums.Option;
 import com.alexcarneiro.roshambo.entities.Player;
+import com.alexcarneiro.roshambo.enums.Option;
 import com.alexcarneiro.roshambo.factories.PlayerFactory;
+import com.alexcarneiro.roshambo.services.GameService;
 
 @SpringBootTest(classes = RoshamboApplication.class)
 @AutoConfigureMockMvc

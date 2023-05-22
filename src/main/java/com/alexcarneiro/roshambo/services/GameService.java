@@ -1,16 +1,17 @@
 package com.alexcarneiro.roshambo.services;
 
-import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
 
-import com.alexcarneiro.roshambo.enums.Option;
-import com.alexcarneiro.roshambo.enums.PlayerType;
-import com.alexcarneiro.roshambo.enums.Outcome;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.alexcarneiro.roshambo.dtos.GameTurnDTO;
 import com.alexcarneiro.roshambo.entities.Player;
+import com.alexcarneiro.roshambo.enums.Option;
+import com.alexcarneiro.roshambo.enums.Outcome;
+import com.alexcarneiro.roshambo.enums.PlayerType;
 import com.alexcarneiro.roshambo.repositories.PlayerRepository;
 
 

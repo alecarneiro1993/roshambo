@@ -1,12 +1,14 @@
 package com.alexcarneiro.roshambo.dtos;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import com.alexcarneiro.roshambo.enums.Outcome;
 import com.alexcarneiro.roshambo.enums.Option;
+import com.alexcarneiro.roshambo.enums.Outcome;
 
 public class GameTurnDTOTest {
 

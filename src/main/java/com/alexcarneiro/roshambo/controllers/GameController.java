@@ -1,17 +1,16 @@
 package com.alexcarneiro.roshambo.controllers;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.beans.factory.annotation.Autowired;
-import java.util.Map;
-import java.util.HashMap;
-import java.lang.Object;
 
 import com.alexcarneiro.roshambo.dtos.GameTurnDTO;
 import com.alexcarneiro.roshambo.services.GameService;
@@ -24,18 +23,18 @@ public class GameController {
     GameService gameService;
 
     @GetMapping("/options")
-    public ResponseEntity getOptions() {
+    public ResponseEntity<?> getOptions() {
         Map<String, Object> response = new HashMap<>();
-        Map data = new HashMap();
+        Map<String, Object> data = new HashMap<>();
         data.put("options", gameService.getOptions());
         response.put("data", data);
         return ResponseEntity.ok(response);
     }
     
     @GetMapping("/players")
-    public ResponseEntity getPlayers() {
+    public ResponseEntity<?> getPlayers() {
         Map<String, Object> response = new HashMap<>();
-        Map data = new HashMap(){{
+        Map<String, Object> data = new HashMap<>(){{
             put("players", gameService.getPlayers());
         }};
         response.put("data", data);
@@ -43,17 +42,17 @@ public class GameController {
     }
 
     @PostMapping("/resolve")
-    public ResponseEntity resolveGameTurn(@RequestBody GameTurnDTO gameTurn) {
+    public ResponseEntity<?> resolveGameTurn(@RequestBody GameTurnDTO gameTurn) {
         Map<String, Object> response = new HashMap<>();
         response.put("data", gameService.process(gameTurn));
         return ResponseEntity.ok(response);
     }
     
     @PostMapping("/reset")
-    public ResponseEntity resetGame() {
+    public ResponseEntity<?> resetGame() {
         Map<String, Object> response = new HashMap<>();
         gameService.resetGame();
-        Map data = new HashMap(){{
+        Map<String, Object> data = new HashMap<>(){{
             put("players", gameService.getPlayers());
         }};
         response.put("data", data);

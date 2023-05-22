@@ -1,9 +1,10 @@
 package com.alexcarneiro.roshambo.enums;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
-import java.util.List;
-import java.util.ArrayList;
 
 public enum WinningCombination {
   ROCK_SCISSOR(0, 2),

@@ -1,20 +1,33 @@
 package com.alexcarneiro.roshambo.services;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-import org.mockito.ArgumentMatchers;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.List;
 import java.util.Map;
 
-import org.junit.jupiter.api.*;
-import org.mockito.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentMatchers;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
-import com.alexcarneiro.roshambo.dtos.*;
-import com.alexcarneiro.roshambo.entities.*;
-import com.alexcarneiro.roshambo.enums.*;
-import com.alexcarneiro.roshambo.repositories.*;
+import com.alexcarneiro.roshambo.dtos.GameTurnDTO;
+import com.alexcarneiro.roshambo.entities.Player;
+import com.alexcarneiro.roshambo.enums.Option;
+import com.alexcarneiro.roshambo.enums.Outcome;
+import com.alexcarneiro.roshambo.enums.PlayerType;
 import com.alexcarneiro.roshambo.factories.PlayerFactory;
+import com.alexcarneiro.roshambo.repositories.PlayerRepository;
 
 public class GameServiceTest {
   
