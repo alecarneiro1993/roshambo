@@ -41,7 +41,7 @@ public class GameControllerTest {
     private Player computer;
 
     @BeforeEach
-    public void setup() {
+    public void beforeEach() {
         player = PlayerFactory.createPlayer();
         computer = PlayerFactory.createComputerPlayer();
     }
