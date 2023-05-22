@@ -62,6 +62,11 @@ Each Database will have a Player table that contains:
 - `Integer health` -> a number from 0 to 100
 - `String image` -> image url/path
 
+## Linter and Formatter
+
+Initially the linting was done by [sonarlint][sonarlint].
+
+But after sometime, linting and formatting of the code was changed to be done by the [Language Support for Java extension][extension].
 
 ## Tests
 
@@ -139,3 +144,5 @@ Resets the current game, resetting the players health bar and bringing their upd
 ```
 
 [roshambo-frontend-git]: https://github.com/alecarneiro1993/roshambo-frontend
+[extension]: https://marketplace.visualstudio.com/items?itemName=redhat.java
+[sonarlint]: https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarlint-vscode
