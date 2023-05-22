@@ -2,6 +2,7 @@ package com.alexcarneiro.roshambo.dtos;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.NoArgsConstructor;
 import java.util.List;
 import java.util.ArrayList;
 import java.lang.Math;
@@ -12,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import com.alexcarneiro.roshambo.enums.*;
 
+@NoArgsConstructor
 public class GameTurnDTO {
   @Getter @Setter private Integer playerValue;
   @Getter @Setter private Integer computerValue;
