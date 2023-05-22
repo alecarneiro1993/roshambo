@@ -23,8 +23,6 @@ public class GameTurnDTOTest {
     
     @Test
     public void constructorInvalid() {
-      GameTurnDTO gameTurn = new GameTurnDTO("INVALID");
-  
       assertThrows(IllegalArgumentException.class, () -> {
             new GameTurnDTO("INVALID");
         });
