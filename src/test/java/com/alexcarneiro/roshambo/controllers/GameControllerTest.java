@@ -57,7 +57,7 @@ public class GameControllerTest {
 
     @Test
     public void getPlayers() throws Exception {
-      Mockito.when(gameService.getNewPlayers()).thenReturn(Arrays.asList(player, computer));
+      Mockito.when(gameService.getPlayers()).thenReturn(Arrays.asList(player, computer));
 
       mockMvc.perform(MockMvcRequestBuilders.get("/api/game/players"))
                 .andExpect(status().isOk())
@@ -89,7 +89,7 @@ public class GameControllerTest {
     
     @Test
     public void resetGame() throws Exception {
-      Mockito.when(gameService.getNewPlayers()).thenReturn(Arrays.asList(player, computer));
+      Mockito.when(gameService.getPlayers()).thenReturn(Arrays.asList(player, computer));
       mockMvc.perform(MockMvcRequestBuilders.post("/api/game/reset"))
               .andExpect(status().isOk())
               .andExpect(jsonPath("$.data.players").exists());

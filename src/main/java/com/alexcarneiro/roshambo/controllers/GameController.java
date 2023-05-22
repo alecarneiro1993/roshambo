@@ -36,7 +36,7 @@ public class GameController {
     public ResponseEntity getPlayers() {
         Map<String, Object> response = new HashMap<>();
         Map data = new HashMap(){{
-            put("players", gameService.getNewPlayers());
+            put("players", gameService.getPlayers());
         }};
         response.put("data", data);
         return ResponseEntity.ok(response);
@@ -54,7 +54,7 @@ public class GameController {
         Map<String, Object> response = new HashMap<>();
         gameService.resetGame();
         Map data = new HashMap(){{
-            put("players", gameService.getNewPlayers());
+            put("players", gameService.getPlayers());
         }};
         response.put("data", data);
         return ResponseEntity.ok(response);

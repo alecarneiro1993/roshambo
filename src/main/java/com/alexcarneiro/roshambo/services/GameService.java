@@ -8,6 +8,7 @@ import java.util.HashMap;
 
 import com.alexcarneiro.roshambo.enums.Option;
 import com.alexcarneiro.roshambo.enums.PlayerType;
+import com.alexcarneiro.roshambo.enums.Outcome;
 import com.alexcarneiro.roshambo.dtos.GameTurnDTO;
 import com.alexcarneiro.roshambo.entities.Player;
 import com.alexcarneiro.roshambo.repositories.PlayerRepository;
@@ -26,35 +27,37 @@ public class GameService {
     return Option.values();
   }
 
-  public Iterable<Player> getNewPlayers() {
-
-  if (playerRepository.count() < 2) {
-      Player player = new Player("Player 1 (You)", PlayerType.PLAYER, "ryu.png");
-      Player computer = new Player("CPU", PlayerType.COMPUTER, "sagat.png");
-      return playerRepository.saveAll(List.of(player, computer));
+  public Iterable<Player> getPlayers() {
+    if(playerRepository.existsByHealthEquals(0)) {
+      playerRepository.resetPlayersHealth();
     }
 
-    return playerRepository.findAll();
+    return playerRepository.count() < 2 ? this.createPlayers() : playerRepository.findAll();
   }
 
   public Map<String, Object> process(GameTurnDTO gameTurn) {
     Option computerChoice = Option.getRandom();
     gameTurn.setComputerValue(computerChoice.getValue());
-    int turnResult = gameTurn.process();
-    int damage = 0;
+    gameTurn.processOutcome();
     boolean gameOver = false;
+    Outcome gameOutcome = gameTurn.getOutcome();
+    int damage = gameTurn.generateDamage();
     
-    if (turnResult != 0) {
-      damage = gameTurn.generateDamage();
-      Player damagedPlayer = playerRepository.findByType(turnResult == 1 ? "computer" : "player");
-      damagedPlayer.takeDamage(damage);
-      if (damagedPlayer.getHealth() == 0) {
+    
+    if(gameOutcome != Outcome.DRAW) {
+      PlayerType playerType = gameOutcome == Outcome.WIN ? PlayerType.COMPUTER : PlayerType.PLAYER;
+      Player player = playerRepository.findByType(playerType.getValue());
+      player.takeDamage(damage);
+      
+      if (player.getHealth() == 0) {
         gameOver = true;
       }
-      playerRepository.save(damagedPlayer);
+
+      playerRepository.save(player);
     }
+
     Map<String, Object> result = new HashMap<>();
-    result.put("message", getTurnMessage(turnResult, damage));
+    result.put("message", getTurnMessage(gameOutcome, damage));
     result.put("computerChoice", computerChoice);
     result.put("players", playerRepository.findAll());
     result.put("gameOver", gameOver);
@@ -65,14 +68,21 @@ public class GameService {
     playerRepository.resetPlayersHealth();
   }
 
-  private String getTurnMessage(int turnResult, int damage) {
-    switch (turnResult) {
-      case 1:
+  private String getTurnMessage(Outcome outcome, int damage) {
+    switch (outcome) {
+      case WIN:
         return String.format("WIN: YOU'VE DEALT %s DAMAGE TO THE ENEMY", damage);
-      case -1:
+      case LOSE:
         return String.format("LOST: YOU'VE TAKEN %s DAMAGE FROM THE ENEMY", damage);
       default:
         return "DRAW: NO ONE TOOK DAMAGE";
     }
+  }
+
+  private Iterable<Player> createPlayers() {
+    playerRepository.deleteAll();
+    Player player = new Player("Player 1 (You)", PlayerType.PLAYER, "ryu.png");
+    Player computer = new Player("CPU", PlayerType.COMPUTER, "sagat.png");
+    return playerRepository.saveAll(List.of(player, computer));
   }
 }

@@ -12,8 +12,9 @@ import com.alexcarneiro.roshambo.entities.Player;
 @Repository
 public interface PlayerRepository extends CrudRepository<Player, Integer> {
     Player findByType(String type);
-    
 
+    boolean existsByHealthEquals(int health);
+    
     @Modifying
     @Query("UPDATE Player p set p.health = 100")
     void resetPlayersHealth();

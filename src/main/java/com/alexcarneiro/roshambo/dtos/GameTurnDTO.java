@@ -15,20 +15,9 @@ import com.alexcarneiro.roshambo.enums.*;
 public class GameTurnDTO {
   @Getter @Setter private Integer playerValue;
   @Getter @Setter private Integer computerValue;
+  @Getter @Setter public Outcome outcome;
   
-  private final int[] damageLimit = { 25, 60 };
-
-  private enum Outcome {
-    WIN(1),
-    DRAW(0),
-    LOSE(-1);
-
-    @Getter private int value;
-
-    Outcome(int value) {
-      this.value = value;
-    }
-  }
+  private final int[] damageLimit = { 25, 60 };  
 
   @JsonCreator
   public GameTurnDTO(@JsonProperty("playerChoice") String choice) {
@@ -46,16 +35,22 @@ public class GameTurnDTO {
     }};
   }
 
-  public int process() {
+  public void processOutcome() {
+    Outcome turnOutcome;
     if (isTie()) {
-      return Outcome.DRAW.getValue();
+      turnOutcome = Outcome.DRAW;
+    } else {
+      List<List<Integer>> values = WinningCombination.getValuesOfCombinations();
+      turnOutcome = values.contains(this.getCombination()) ? Outcome.WIN : Outcome.LOSE;
     }
-
-    List<List<Integer>> values = WinningCombination.getValuesOfCombinations();
-    return (values.contains(this.getCombination()) ? Outcome.WIN : Outcome.LOSE).getValue();
+    this.setOutcome(turnOutcome);
   }
 
   public int generateDamage() {
+    if(outcome.getValue() == 0) {
+      return 0;
+    }
+
     return (int) ((Math.random() * (damageLimit[1] - damageLimit[0])) + damageLimit[0]);
   }
 
