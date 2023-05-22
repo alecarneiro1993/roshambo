@@ -191,7 +191,6 @@ public class GameServiceTest {
       when(playerRepository.findAll()).thenReturn(List.of(player, computer));
       
       result = gameService.process(gameTurn);
-      System.out.println(result);
       assertNotNull(result);
       assertTrue(result.containsKey("computerChoice"));
       assertTrue(result.get("message").toString().contains("WIN"));
