@@ -2,6 +2,25 @@
 
 Java Backend application that works together with [roshambo-frontend][roshambo-frontend-git].
 
+## Description
+
+The application provides endpoints to allow the game preparation and also the actions the player takes.
+The frontend counterpart supplies the choice of the human player via a HTTP Request.
+
+When receiving the player choice, through the `/resolve` endpoint,
+a class called GameService will process what its called a `GameTurn`.
+
+The `GameTurn` has all the information about the player choice, the computer choice and the `Outcome`.
+
+Depending on the `Outcome`, one of the players will take a hit, meaning a randomly generated number will subtract its health.
+
+This does not happen if the `Outcome` is a draw, meaning no one took damage.
+
+Also, at any point that a `Player` reaches health amount of `0`, the game is over and this is signaled to the frontend
+to be handled properly.
+
+The game can be reseted via the `/reset` endpoint and allows for a new playthrough.
+
 ## Versions
 
 ```bash
@@ -18,6 +37,8 @@ For building the project, you may use `gradle build` (add `--continuous` flag if
 For running the server, you may use `gradle bootRun`.
 
 ## Database setup
+
+This application uses `mysql`, so you should have it installed in your machine.
 
 The application should be able to automatically create two databases:
 
