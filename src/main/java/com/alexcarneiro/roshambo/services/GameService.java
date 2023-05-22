@@ -51,7 +51,7 @@ public class GameService {
 
       player.takeDamage(damage);
       
-      if (player.getHealth() == 0) {
+      if (player.isKnockedOut()) {
         gameOver = true;
       }
 

@@ -48,4 +48,8 @@ public class Player {
     int currentHealth = this.health - damage;
     setHealth(currentHealth <= 0 ? 0 : currentHealth);
   }
+
+  public boolean isKnockedOut() {
+    return this.health == 0;
+  }
 }
