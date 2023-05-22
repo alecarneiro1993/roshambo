@@ -106,7 +106,25 @@ Reset all players health and return them in the payload
 #### Payload
 
 ```json
-{ "data": { "players": [{/* player */}, { /* computer */}] } }
+{ "data": { 
+    "players": [
+      {
+        "id": 1,
+        "name": "name",
+        "type": "player",
+        "image": "path/url",
+        "health": 100
+      },
+      {
+        "id": 1,
+        "name": "name",
+        "type": "player",
+        "image": "path/url",
+        "health": 100
+      }
+    ],
+  }
+}
 ```
 
 ### POST /api/game/resolve
@@ -116,7 +134,7 @@ Receives the player choice and processes the game turn to return the outcome, th
 #### Request Body
 
 ```json
-{ "playerChoice": "string" } // "ROCK" | "PAPER" | "SCISSOR"
+{ "playerChoice": "string" }
 ```
 
 #### Payload
@@ -124,10 +142,25 @@ Receives the player choice and processes the game turn to return the outcome, th
 ```json
 { 
   "data": { 
-    "message": "string", // String message to display the result outcome,
-    "computerChoice": "string", // "Choice randomly made by the Computer",
-    "players": [{/* player */}, { /* computer */}], // Updated Players attributes including their health
-    "gameOver": "boolean" // if the game is over
+    "message": "string",
+    "computerChoice": "string",
+    "players": [
+      {
+        "id": 1,
+        "name": "name",
+        "type": "player",
+        "image": "path/url",
+        "health": 100
+      },
+      {
+        "id": 1,
+        "name": "name",
+        "type": "player",
+        "image": "path/url",
+        "health": 100
+      }
+    ],
+    "gameOver": "boolean"
   }
 }
 ```
@@ -140,7 +173,26 @@ Resets the current game, resetting the players health bar and bringing their upd
 #### Payload
 
 ```json
-{ "data": { "players": [{/* player */}, { /* computer */}] } }
+{ 
+  "data": {
+    "players": [
+        {
+          "id": 1,
+          "name": "name",
+          "type": "player",
+          "image": "path/url",
+          "health": 100
+        },
+        {
+          "id": 1,
+          "name": "name",
+          "type": "player",
+          "image": "path/url",
+          "health": 100
+        }
+      ],
+  }
+}
 ```
 
 [roshambo-frontend-git]: https://github.com/alecarneiro1993/roshambo-frontend
