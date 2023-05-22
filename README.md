@@ -1,6 +1,16 @@
 # Roshambo
 
-Java Backend application that works together with [roshambo-frontend][roshambo-frontend-git].
+Spring Boot Java Backend application that works together with [roshambo-frontend][roshambo-frontend-git].
+
+## Welcome
+
+To the backend counterpart of the game **ROSHAMBO**.
+
+In this README, you will find many essential information.
+
+## How does it work?
+
+You may find a full description of how the game works in [roshambo-frontend][roshambo-frontend-git].
 
 ## Description
 
@@ -8,7 +18,7 @@ The application provides endpoints to allow the game preparation and also the ac
 The frontend counterpart supplies the choice of the human player via a HTTP Request.
 
 When receiving the player choice, through the `/resolve` endpoint,
-a class called GameService will process what its called a `GameTurn`.
+a class called `GameService` will process what its called a `GameTurn`.
 
 The `GameTurn` has all the information about the player choice, the computer choice and the `Outcome`.
 
@@ -16,8 +26,7 @@ Depending on the `Outcome`, one of the players will take a hit, meaning a random
 
 This does not happen if the `Outcome` is a draw, meaning no one took damage.
 
-Also, at any point that a `Player` reaches health amount of `0`, the game is over and this is signaled to the frontend
-to be handled properly.
+Also, at any point that a `Player` reaches health amount of `0`, the game is over and this is reported back to the frontend.
 
 The game can be reseted via the `/reset` endpoint and allows for a new playthrough.
 
