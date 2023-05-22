@@ -4,6 +4,9 @@ import java.util.Random;
 
 import lombok.Getter;
 
+/**
+ * Enumerable that represents the available options in the game.
+ */
 public enum Option {
   ROCK(0),
   PAPER(1),
@@ -16,6 +19,11 @@ public enum Option {
     this.value = value;
   }
 
+    /**
+   * Function that randomly returns an Option
+   *
+   * @return Option
+   */
   public static Option getRandom() {
     Random random = new Random();
     Option[] options = Option.values();

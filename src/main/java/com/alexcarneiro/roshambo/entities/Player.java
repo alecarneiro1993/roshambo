@@ -12,6 +12,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Entity that represents a Player in the game
+ */
 @Entity
 @Table (name = "players")
 @NoArgsConstructor
@@ -40,6 +43,15 @@ public class Player {
     this.health = 100;
   }
 
+  /**
+   * Function that reduces the player's health
+   * by the given amount.
+   * 
+   * If the amount is greater than the player's health,
+   * then it sets it to 0 instead of a negative number
+   * 
+   * @param damage - integer that represents the amount of damage
+   */
   public void takeDamage(int damage) {
     if (this.health <= 0) {
       return;
@@ -49,7 +61,16 @@ public class Player {
     setHealth(currentHealth <= 0 ? 0 : currentHealth);
   }
 
-  public boolean isKnockedOut() {
+  /**
+   * Function that determines whether or not
+   * a player is still able to play the game.
+   * 
+   * If the player has no more health, then
+   * the last one standing is the winner.
+   *
+   * @return Boolean
+   */
+  public Boolean isKnockedOut() {
     return this.health == 0;
   }
 }

@@ -92,7 +92,7 @@ Reset all players health and return them in the payload
 #### Payload
 
 ```json
-{ "data": { "players": [Player, Computer] } }
+{ "data": { "players": [{/* player */}, { /* computer */}] } }
 ```
 
 ### POST /api/game/resolve
@@ -112,8 +112,8 @@ Receives the player choice and processes the game turn to return the outcome, th
   "data": { 
     "message": "string", // String message to display the result outcome,
     "computerChoice": "string", // "Choice randomly made by the Computer",
-    "players": [Player, Computer], // Updated Players attributes including their health
-    "gameOver": boolean // if the game is over
+    "players": [{/* player */}, { /* computer */}], // Updated Players attributes including their health
+    "gameOver": "boolean" // if the game is over
   }
 }
 ```
@@ -126,7 +126,7 @@ Resets the current game, resetting the players health bar and bringing their upd
 #### Payload
 
 ```json
-{ "data": { "players": [Player, Computer] } }
+{ "data": { "players": [{/* player */}, { /* computer */}] } }
 ```
 
 [roshambo-frontend-git]: https://github.com/alecarneiro1993/roshambo-frontend

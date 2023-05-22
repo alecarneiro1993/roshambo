@@ -2,6 +2,9 @@ package com.alexcarneiro.roshambo.enums;
 
 import lombok.Getter;
 
+/**
+ * Enumerable that represents the possible outcomes of a GameTurn.
+ */
 public enum Outcome {
   WIN(1),
   DRAW(0),

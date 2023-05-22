@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.alexcarneiro.roshambo.dtos.GameTurnDTO;
 import com.alexcarneiro.roshambo.services.GameService;
 
+/**
+* Provides endpoints to game related requests.
+*/
 @RestController
 @RequestMapping("/api/game")
 @CrossOrigin(origins = "http://localhost:4200")
@@ -22,6 +25,13 @@ public class GameController {
     @Autowired
     GameService gameService;
 
+    
+    /**
+     * GET Request that returns the available options of the game
+     * @return ResponseEntity<?>
+     * { data: { options: ["ROCK", "PAPER", "SCISSOR"] } }
+     *
+     */
     @GetMapping("/options")
     public ResponseEntity<?> getOptions() {
         Map<String, Object> response = new HashMap<>();
@@ -31,6 +41,12 @@ public class GameController {
         return ResponseEntity.ok(response);
     }
     
+    /**
+     * GET Request that returns the players of the game
+     * @return ResponseEntity<?>
+     * { data: { players: [Player, Player] } }
+     * 
+     */
     @GetMapping("/players")
     public ResponseEntity<?> getPlayers() {
         Map<String, Object> response = new HashMap<>();
@@ -41,6 +57,20 @@ public class GameController {
         return ResponseEntity.ok(response);
     }
 
+    /**
+     * POST Request that processes the GameTurn
+     * @param playerChoice the player's choice. 
+     * @return ResponseEntity<?>
+     * { 
+     *   data: {
+     *     message: String,
+     *     computerChoice: String,
+     *     players: [Player, Player],
+     *     gameOver: Boolean
+     *   } 
+     * }
+     * 
+     */
     @PostMapping("/resolve")
     public ResponseEntity<?> resolveGameTurn(@RequestBody GameTurnDTO gameTurn) {
         Map<String, Object> response = new HashMap<>();
@@ -48,6 +78,12 @@ public class GameController {
         return ResponseEntity.ok(response);
     }
     
+    /**
+     * POST Request that resets the players health
+     * @return ResponseEntity<?>
+     * { data: { players: [Player, Player] } }
+     * 
+     */
     @PostMapping("/reset")
     public ResponseEntity<?> resetGame() {
         Map<String, Object> response = new HashMap<>();
