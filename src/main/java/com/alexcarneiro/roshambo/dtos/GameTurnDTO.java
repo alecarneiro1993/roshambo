@@ -1,7 +1,6 @@
 package com.alexcarneiro.roshambo.dtos;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 import com.alexcarneiro.roshambo.enums.Option;
@@ -16,14 +15,14 @@ import lombok.Setter;
 
 /**
  * Representation of a GameTurn, consisting of:
- * playerValue - integer value of the player's choice
- * computerValue - integer value of the computer's choice
- * outcome - turn outcome
+ * playerChoice - one of the possible Options
+ * computerChoice - one of the possible Options
+ * outcome -  outcome
  */
 @NoArgsConstructor
 public class GameTurnDTO {
-  @Getter @Setter private Integer playerValue;
-  @Getter @Setter private Integer computerValue;
+  @Getter @Setter private Option playerChoice;
+  @Getter @Setter private Option computerChoice;
   @Getter @Setter public Outcome outcome;
   
   /**
@@ -35,7 +34,7 @@ public class GameTurnDTO {
   @JsonCreator
   public GameTurnDTO(@JsonProperty("playerChoice") String choice) {
     try {
-      this.playerValue = Option.valueOf(choice).getValue();
+      this.playerChoice = Option.valueOf(choice);
     } catch (IllegalArgumentException e) {
       throw new IllegalArgumentException("Invalid Choice " + choice, e);
     }
@@ -49,8 +48,8 @@ public class GameTurnDTO {
    */
   public List<Integer> getCombination() {
     return new ArrayList<Integer>(){{
-      add(playerValue);
-      add(computerValue);
+      add(playerChoice.getValue());
+      add(computerChoice.getValue());
     }};
   }
 
@@ -86,7 +85,7 @@ public class GameTurnDTO {
    * @return int
    */
   public int generateDamage() {
-    if(outcome.getValue() == 0) {
+    if(Outcome.DRAW == outcome) {
       return 0;
     }
 
@@ -103,6 +102,6 @@ public class GameTurnDTO {
    * @return Boolean
    */
   private Boolean isTie() {
-    return new HashSet<Integer>(this.getCombination()).size() == 1; 
+    return playerChoice == computerChoice;
   }
 }

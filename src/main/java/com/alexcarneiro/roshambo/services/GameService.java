@@ -63,12 +63,12 @@ public class GameService {
    * @return Map<String, Object>
    */
   public Map<String, Object> process(GameTurnDTO gameTurn) {
-    logger.info("** Processing Game Turn **");
+    logger.info("** Starting processing of GameTurn **");
     
     Option computerChoice = Option.getRandom();
     logger.info(String.format("** Computer has chosen %s **", computerChoice));
     
-    gameTurn.setComputerValue(computerChoice.getValue());
+    gameTurn.setComputerChoice(computerChoice);
     gameTurn.processOutcome();
     boolean gameOver = false;
     Outcome gameOutcome = gameTurn.getOutcome();
@@ -91,10 +91,11 @@ public class GameService {
     logger.info(String.format("""
       ** Turn Results **
       Damage: %s
+      Player chose: %s
       Computer chose: %s
       Outcome: %s
       Game Over?: %s
-    """, damage, computerChoice, gameOutcome, gameOver));
+    """, damage, gameTurn.getPlayerChoice(), computerChoice, gameOutcome, gameOver));
 
     Map<String, Object> result = new HashMap<>();
     result.put("message", getTurnMessage(gameOutcome, damage));
