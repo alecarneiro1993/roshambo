@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.alexcarneiro.roshambo.dtos.GameTurnDTO;
@@ -14,14 +15,15 @@ import com.alexcarneiro.roshambo.enums.Outcome;
 import com.alexcarneiro.roshambo.enums.PlayerType;
 import com.alexcarneiro.roshambo.repositories.PlayerRepository;
 
+
 /**
  * Service that handles game related business logic.
  */
 @Service
 public class GameService {
   private final PlayerRepository playerRepository;
+  private final Logger logger = LoggerFactory.getLogger(GameService.class);
 
-  @Autowired
   public GameService(PlayerRepository playerRepository) {
     this.playerRepository = playerRepository;
   }
@@ -44,6 +46,7 @@ public class GameService {
    */
   public Iterable<Player> getPlayers() {
     if(playerRepository.existsByHealthEquals(0)) {
+      logger.info("** Resetting Players Health **");
       playerRepository.resetPlayersHealth();
     }
 
@@ -60,8 +63,12 @@ public class GameService {
    * @return Map<String, Object>
    */
   public Map<String, Object> process(GameTurnDTO gameTurn) {
+    logger.info("** Starting processing of GameTurn **");
+    
     Option computerChoice = Option.getRandom();
-    gameTurn.setComputerValue(computerChoice.getValue());
+    logger.info(String.format("** Computer has chosen %s **", computerChoice));
+    
+    gameTurn.setComputerChoice(computerChoice);
     gameTurn.processOutcome();
     boolean gameOver = false;
     Outcome gameOutcome = gameTurn.getOutcome();
@@ -80,6 +87,15 @@ public class GameService {
 
       playerRepository.save(player);
     }
+
+    logger.info(String.format("""
+      ** Turn Results **
+      Damage: %s
+      Player chose: %s
+      Computer chose: %s
+      Outcome: %s
+      Game Over?: %s
+    """, damage, gameTurn.getPlayerChoice(), computerChoice, gameOutcome, gameOver));
 
     Map<String, Object> result = new HashMap<>();
     result.put("message", getTurnMessage(gameOutcome, damage));
@@ -121,6 +137,7 @@ public class GameService {
    * them from scratch
    */
   private Iterable<Player> createPlayers() {
+    logger.info("** Creating new Players **");
     playerRepository.deleteAll();
     Player player = new Player("Player 1 (You)", PlayerType.PLAYER, "ryu.png");
     Player computer = new Player("CPU", PlayerType.COMPUTER, "sagat.png");

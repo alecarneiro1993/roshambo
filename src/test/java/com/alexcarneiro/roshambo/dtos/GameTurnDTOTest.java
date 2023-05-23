@@ -18,7 +18,7 @@ public class GameTurnDTOTest {
       Option option = Option.ROCK;
       GameTurnDTO gameTurn = new GameTurnDTO(option.toString());
   
-      assertEquals(option.getValue(), gameTurn.getPlayerValue());
+      assertEquals(option.getValue(), gameTurn.getPlayerChoice().getValue());
     }
     
     @Test
@@ -40,8 +40,8 @@ public class GameTurnDTOTest {
     
     @Test
     public void processOutcomeWin() {
-        gameTurn.setPlayerValue(Option.ROCK.getValue());
-        gameTurn.setComputerValue(Option.SCISSOR.getValue());
+        gameTurn.setPlayerChoice(Option.ROCK);
+        gameTurn.setComputerChoice(Option.SCISSOR);
   
         gameTurn.processOutcome();
   
@@ -50,8 +50,8 @@ public class GameTurnDTOTest {
     
     @Test
     public void processOutcomeLose() {
-        gameTurn.setPlayerValue(Option.ROCK.getValue());
-        gameTurn.setComputerValue(Option.PAPER.getValue());
+        gameTurn.setPlayerChoice(Option.ROCK);
+        gameTurn.setComputerChoice(Option.PAPER);
   
         gameTurn.processOutcome();
   
@@ -60,8 +60,8 @@ public class GameTurnDTOTest {
     
     @Test
     public void processOutcomeDraw() {
-        gameTurn.setPlayerValue(Option.ROCK.getValue());
-        gameTurn.setComputerValue(Option.ROCK.getValue());
+        gameTurn.setPlayerChoice(Option.ROCK);
+        gameTurn.setComputerChoice(Option.ROCK);
   
         gameTurn.processOutcome();
   
