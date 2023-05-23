@@ -116,9 +116,9 @@ Reset all players health and return them in the payload
         "health": 100
       },
       {
-        "id": 1,
+        "id": 2,
         "name": "name",
-        "type": "player",
+        "type": "computer",
         "image": "path/url",
         "health": 100
       }
@@ -153,9 +153,9 @@ Receives the player choice and processes the game turn to return the outcome, th
         "health": 100
       },
       {
-        "id": 1,
+        "id": 2,
         "name": "name",
-        "type": "player",
+        "type": "computer",
         "image": "path/url",
         "health": 100
       }
@@ -184,9 +184,9 @@ Resets the current game, resetting the players health bar and bringing their upd
           "health": 100
         },
         {
-          "id": 1,
+          "id": 2,
           "name": "name",
-          "type": "player",
+          "type": "computer",
           "image": "path/url",
           "health": 100
         }
