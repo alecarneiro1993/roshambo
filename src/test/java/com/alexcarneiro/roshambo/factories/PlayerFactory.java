@@ -11,7 +11,7 @@ public class PlayerFactory {
   public static Player createPlayer() {
     Player player = new Player();
     player.setName(faker.name().fullName());
-    player.setType(PlayerType.PLAYER.getValue());
+    player.setType(PlayerType.PLAYER);
     player.setImage(faker.internet().image());
     player.setHealth(100);
 
@@ -21,7 +21,7 @@ public class PlayerFactory {
   public static Player createComputerPlayer() {
     Player player = new Player();
     player.setName(faker.name().fullName());
-    player.setType(PlayerType.COMPUTER.getValue());
+    player.setType(PlayerType.COMPUTER);
     player.setImage(faker.internet().image());
     player.setHealth(100);
 

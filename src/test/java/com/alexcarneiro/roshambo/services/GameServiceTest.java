@@ -136,7 +136,7 @@ public class GameServiceTest {
 
       doReturn(Outcome.WIN).when(gameTurn).getOutcome();
       doReturn(25).when(gameTurn).generateDamage();
-      when(playerRepository.findByType(PlayerType.COMPUTER.getValue())).thenReturn(computer);
+      when(playerRepository.findByType(PlayerType.COMPUTER)).thenReturn(computer);
       when(playerRepository.findAll()).thenReturn(List.of(player, computer));
       
       result = gameService.process(gameTurn);
@@ -153,7 +153,7 @@ public class GameServiceTest {
 
       doReturn(Outcome.LOSE).when(gameTurn).getOutcome();
       doReturn(25).when(gameTurn).generateDamage();
-      when(playerRepository.findByType(PlayerType.PLAYER.getValue())).thenReturn(player);
+      when(playerRepository.findByType(PlayerType.PLAYER)).thenReturn(player);
       when(playerRepository.findAll()).thenReturn(List.of(player, computer));
       
       result = gameService.process(gameTurn);
@@ -186,7 +186,7 @@ public class GameServiceTest {
 
       doReturn(Outcome.WIN).when(gameTurn).getOutcome();
       doReturn(100).when(gameTurn).generateDamage();
-      when(playerRepository.findByType(PlayerType.COMPUTER.getValue())).thenReturn(computer);
+      when(playerRepository.findByType(PlayerType.COMPUTER)).thenReturn(computer);
       computer.setHealth(0);
       when(playerRepository.findAll()).thenReturn(List.of(player, computer));
       

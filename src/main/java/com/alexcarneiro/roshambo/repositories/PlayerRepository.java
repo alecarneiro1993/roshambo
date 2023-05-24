@@ -6,6 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.alexcarneiro.roshambo.entities.Player;
+import com.alexcarneiro.roshambo.enums.PlayerType;
 
 /**
  * Repository that handles all statements related to
@@ -18,7 +19,7 @@ public interface PlayerRepository extends CrudRepository<Player, Integer> {
      * 
      * @return Player
      */
-    Player findByType(String type);
+    Player findByType(PlayerType playerType);
 
     /**
      * Function checks whether there's a Player with no health

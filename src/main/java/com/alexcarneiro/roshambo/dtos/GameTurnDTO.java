@@ -46,10 +46,10 @@ public class GameTurnDTO {
    * 
    * @return List<Integer>
    */
-  public List<Integer> getCombination() {
-    return new ArrayList<Integer>(){{
-      add(playerChoice.getValue());
-      add(computerChoice.getValue());
+  public List<Option> getCombination() {
+    return new ArrayList<Option>(){{
+      add(playerChoice);
+      add(computerChoice);
     }};
   }
 
@@ -68,7 +68,7 @@ public class GameTurnDTO {
     if (isTie()) {
       turnOutcome = Outcome.DRAW;
     } else {
-      List<List<Integer>> values = WinningCombination.getValuesOfCombinations();
+      List<List<Option>> values = WinningCombination.getCombinations();
       turnOutcome = values.contains(this.getCombination()) ? Outcome.WIN : Outcome.LOSE;
     }
     this.setOutcome(turnOutcome);

@@ -2,24 +2,15 @@ package com.alexcarneiro.roshambo.enums;
 
 import java.util.Random;
 
-import lombok.Getter;
-
 /**
  * Enumerable that represents the available options in the game.
  */
 public enum Option {
-  ROCK(0),
-  PAPER(1),
-  SCISSOR(2);
+  ROCK,
+  PAPER,
+  SCISSOR;
 
-  @Getter
-  private int value;
-
-  Option(int value) {
-    this.value = value;
-  }
-
-    /**
+  /**
    * Function that randomly returns an Option
    *
    * @return Option

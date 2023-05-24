@@ -11,16 +11,16 @@ import lombok.Setter;
  * a human player can win from the computer.
  */
 public enum WinningCombination {
-  ROCK_SCISSOR(0, 2),
-  PAPER_ROCK(1, 0),
-  SCISSOR_PAPER(2, 1);
+  ROCK_SCISSOR(Option.ROCK, Option.SCISSOR),
+  PAPER_ROCK(Option.PAPER, Option.ROCK),
+  SCISSOR_PAPER(Option.SCISSOR, Option.PAPER);
 
-  @Getter @Setter private List<Integer> combination;
+  @Getter @Setter private List<Option> combination;
 
-  WinningCombination(int playerValue, int computerValue) {
-    this.combination = new ArrayList<Integer>(){{
-      add(playerValue);
-      add(computerValue);
+  WinningCombination(Option playerChoice, Option computerChoice) {
+    this.combination = new ArrayList<Option>(){{
+      add(playerChoice);
+      add(computerChoice);
     }};
   }
 
@@ -30,8 +30,8 @@ public enum WinningCombination {
    * 
    * @return List<List<Integer>>
    */
-  public static List<List<Integer>> getValuesOfCombinations() {    
-    return new ArrayList<List<Integer>>(){{
+  public static List<List<Option>> getCombinations() {    
+    return new ArrayList<List<Option>>(){{
       for (WinningCombination winningCombination : WinningCombination.values()) {
         add(winningCombination.getCombination());
       }

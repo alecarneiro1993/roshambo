@@ -77,7 +77,7 @@ public class GameService {
     
     if(gameOutcome != Outcome.DRAW) {
       PlayerType playerType = gameOutcome == Outcome.WIN ? PlayerType.COMPUTER : PlayerType.PLAYER;
-      Player player = playerRepository.findByType(playerType.getValue());
+      Player player = playerRepository.findByType(playerType);
 
       player.takeDamage(damage);
       

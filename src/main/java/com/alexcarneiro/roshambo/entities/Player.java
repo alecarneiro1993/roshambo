@@ -28,7 +28,7 @@ public class Player {
   @Getter @Setter private String name;
 
   @Column(name = "type")
-  @Getter @Setter private String type;
+  @Getter @Setter private PlayerType type;
 
   @Column(name = "image")
   @Getter @Setter private String image;
@@ -38,7 +38,7 @@ public class Player {
 
   public Player(String name, PlayerType type, String image ) {
     this.name = name;
-    this.type = type.getValue();
+    this.type = type;
     this.image = String.format("../../assets/images/%s", image);
     this.health = 100;
   }
