@@ -18,7 +18,7 @@ public class GameTurnDTOTest {
       Option option = Option.ROCK;
       GameTurnDTO gameTurn = new GameTurnDTO(option.toString());
   
-      assertEquals(option.getValue(), gameTurn.getPlayerChoice().getValue());
+      assertEquals(option, gameTurn.getPlayerChoice());
     }
     
     @Test

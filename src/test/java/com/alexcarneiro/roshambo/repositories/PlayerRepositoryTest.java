@@ -46,7 +46,7 @@ public class PlayerRepositoryTest {
         entityManager.persist(player);
         entityManager.flush();
 
-        Player returnedPlayer = playerRepository.findByType(PlayerType.PLAYER.getValue());
+        Player returnedPlayer = playerRepository.findByType(PlayerType.PLAYER);
         assertEquals(player, returnedPlayer);
     }
     
