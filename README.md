@@ -47,7 +47,7 @@ For running the server, you may use `gradle bootRun`.
 
 ## Database setup
 
-This application uses `mysql`, so you should have it installed in your machine.
+This application uses `h2` as database.
 
 The application should be able to automatically create two databases:
 
