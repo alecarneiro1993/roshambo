@@ -28,7 +28,7 @@ public enum WinningCombination {
    * Function that returns all possible winning
    * lists to be compared with the current turn's list
    * 
-   * @return List<List<Integer>>
+   * @return List<List<Option>>
    */
   public static List<List<Option>> getCombinations() {    
     return new ArrayList<List<Option>>(){{

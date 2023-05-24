@@ -44,7 +44,7 @@ public class GameTurnDTO {
    * Function that gets both player and computer values
    * and returns them in a list
    * 
-   * @return List<Integer>
+   * @return List<Option>
    */
   public List<Option> getCombination() {
     return new ArrayList<Option>(){{
@@ -55,7 +55,7 @@ public class GameTurnDTO {
 
   /**
    * Function that determines the outcome based on the
-   * combination of the integer values.
+   * combination of the Option values.
    * 
    * The enum WinningCombination contains all possible
    * combinations for a human Player to win.
